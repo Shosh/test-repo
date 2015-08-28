@@ -62,7 +62,7 @@ module.exports = function (grunt) {
         ]
       }
     },
-
+    
     // The actual grunt server settings
     connect: {
       options: {
@@ -419,6 +419,17 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+    protractor: {
+        travis: {
+            options: {
+                configFile: 'protractor-config.js',
+                args: {
+                    sauceUser: process.env.SAUCE_USERNAME,
+                    sauceKey: process.env.SAUCE_ACCESS_KEY
+                }
+            }
+        }
     }
   });
 
@@ -437,6 +448,25 @@ module.exports = function (grunt) {
       'watch'
     ]);
   });
+
+  grunt.registerTask('sauce-connect', 'Launch Sauce Connect', function () {
+        var done = this.async();
+        require('sauce-connect-launcher')({
+            username: process.env.SAUCE_USERNAME,
+            accessKey: process.env.SAUCE_ACCESS_KEY
+        }, function (err, sauceConnectProcess) {
+            if (err) {
+                console.error(err.message);
+            } else {
+                done();
+            }
+        });
+  });
+
+  grunt.registerTask('test:protractor-travis', [
+        'sauce-connect',
+        'protractor:travis'
+    ]);
 
   grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
