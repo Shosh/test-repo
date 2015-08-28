@@ -1,6 +1,11 @@
 language: node_js
 node_js:
   - '0.10'
+addons:
+  sauce_connect:
+    username: "mh_vasileva"
+    access_key:
+      secure: "QMc2/atV9UBjQYj1ZB3Tjpo/pijEWkgHHXM0OTzpKiWV3I/RX3abyR3ohTi35C38BbI50sn4ZmHFY+l3W/v09D6BnY2kK2FgUsGAcD1Cl1ZU4veqOPgcsoJ7c7KK74zCm77u8BA52G7wvOfiQIJ94Cmja5ry3904ic2S2F5sShndtxtgh4CleeSYrlnzllI2pLn2pARBqOFWZ3lMDvFuCWxNCNJoD/22hQN/eEUZr4oFC7HdHDKzIyzQEe37j2dcZPNKVUgvX5uBd++KdML6Z7umPvTidV+xmw+Rs6zx7jSQM5G+NMni0NhUXgt5P8l1a3PqZLrlxy2QzT2F2AdSAkjHBD7g+1VhWceTj4AeFhHDnCpzdWXPXjwbfci6iFiSNyHZpJ+b0l6C0S0H3aIYB1clh+auQZB6taHk48L+1pjnNvhUvnDvqwnAUZbTz4zFtD8h+a13N0jvfdsrqPvWLFoty1qcBV2402s1DdK6Q5sQwysMb8PROISBKNfNOlSKGyPnuinSH01ng/ZIt3UjECXEz0GHYXwMsFHGzLJ6V3kXMymI/41Bsg0qKDMSvQUJAKvSFZ4U4pTNs6EMResNfZipe6aSpaIdOok859SLHwfo+iNAU8sWMhRBgZGRYSL/yoSZfpMtXcyNWw0VdySKKU//Dd29xbmvgN2+Jnpi3n8="
 before_script:
   - 'npm install -g bower grunt-cli'
   - 'npm install'
