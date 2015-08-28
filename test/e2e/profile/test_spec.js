@@ -5,7 +5,7 @@ chai.use(chaiAsPromised);
 var expect = chai.expect;
 
 describe('Test', function() {
-  
+  this.timeout(15000);
   
   beforeEach(function() {
     browser.get('http://localhost:9000/#/profile');
@@ -16,6 +16,7 @@ describe('Test', function() {
     elt.getText()
       .then(function(text) {
         expect(text).to.equal('m.h.vasileva@gmail.com');
+        done();
       });
   });
 });
