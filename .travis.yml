@@ -5,3 +5,4 @@ before_script:
   - 'npm install -g bower grunt-cli'
   - 'npm install'
   - 'bower install'
+  - './node_modules/karma/bin/karma start test/karma.conf.js'
