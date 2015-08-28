@@ -3,7 +3,6 @@ exports.config = {
   sauceUser: process.env.SAUCE_USERNAME,
   sauceKey: process.env.SAUCE_ACCESS_KEY,
   specs: ['test/e2e/profile/*.js'],
-  baseUrl: 'http://localhost:9000/#',
   framework: 'mocha',
   mochaOpts: {
     reporter: 'spec',
