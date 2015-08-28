@@ -10,6 +10,6 @@ exports.config = {
     tmeout: 3000
   },
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'firefox'
   }
 };
