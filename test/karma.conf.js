@@ -36,8 +36,8 @@ module.exports = function(config) {
       'karma-spec-reporter'
     ],
 
-    autoWatch: true,
-    singleRun: false,
+    autoWatch: false,
+    singleRun: true,
     colors: true,
     logLevel: config.LOG_INFO
   });
