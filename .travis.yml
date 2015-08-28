@@ -11,3 +11,4 @@ before_script:
   - 'npm install'
   - 'bower install'
   - './node_modules/karma/bin/karma start test/karma.conf.js'
+  - './node_modules/protractor/bin/protractor protractor-config.js'
