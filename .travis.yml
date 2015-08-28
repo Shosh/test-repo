@@ -11,4 +11,4 @@ before_script:
   - 'bower install'
 script:
   - './node_modules/karma/bin/karma start test/karma.conf.js'
-  - './node_modules/protractor/bin/protractor protractor-config.js'
+  - grunt test:protractor-travis
