@@ -10,8 +10,11 @@ exports.config = {
   },
   chromeOnly: false,
   seleniumPort: null,
-  capabilities: {
-    'browserName': 'firefox'
-  }
+  multiCapabilities: [
+    {
+      browserName: 'chrome',
+      'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER ? process.env.TRAVIS_JOB_NUMBER : null
+    }
+  ]
   
 };
