@@ -4,28 +4,16 @@ var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 var expect = chai.expect;
 
+var browser = new webdriver.Builder();
+browser.forBrowser("chrome");
+browser.withCapabilities(webdriver.Capabilities.chrome());
+browser.build();
+
 describe('Test', function() {
   this.timeout(15000);
 
   beforeEach(function() {
-    if (process.env.SAUCE_USERNAME != undefined) {
-      this.browser = new webdriver.Builder()
-      .usingServer('http://'+ process.env.SAUCE_USERNAME+':'+process.env.SAUCE_ACCESS_KEY+'@ondemand.saucelabs.com:80/wd/hub')
-      .withCapabilities({
-        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-        build: process.env.TRAVIS_BUILD_NUMBER,
-        username: process.env.SAUCE_USERNAME,
-        accessKey: process.env.SAUCE_ACCESS_KEY,
-        browserName: "chrome"
-      }).build();
-    } else {
-      this.browser = new webdriver.Builder()
-      .withCapabilities({
-        browserName: "chrome"
-      }).build();
-    }
-
-    return this.browser.get("http://localhost:9000/#/profile");
+    return browser.get("http://localhost:9000/#/profile");
   });
 
   it('should have email there', function() {
