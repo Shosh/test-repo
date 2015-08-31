@@ -16,7 +16,6 @@ describe('Test', function() {
     elt.getText()
       .then(function(text) {
         expect(text).to.equal('m.h.vasileva@gmail.com');
-        done();
       });
   });
 });
