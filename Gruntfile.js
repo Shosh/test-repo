@@ -418,12 +418,10 @@ module.exports = function (grunt) {
         keepAlive: false,
         configFile: "protractor-config.js"
       },
-      saucelabs: {
+      webdriver: {
         options: {
-          args: {
-            sauceUser: process.env.SAUCE_USERNAME,
-            sauceKey: process.env.SAUCE_ACCESS_KEY
-          }
+          user: process.env.SAUCE_USERNAME,
+          key: process.env.SAUCE_ACCESS_KEY
         }
       }
     },
@@ -498,4 +496,7 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+    grunt.loadNpmTasks('grunt-webdriver');
+
 };
