@@ -15,6 +15,9 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  var sauceUser = 'mh_vasileva';
+  var sauceKey = 'bed742a6-791a-417d-a4f2-e830d848bbb2';
+
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
@@ -68,7 +71,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
@@ -86,6 +89,19 @@ module.exports = function (grunt) {
                 connect.static('./app/styles')
               ),
               connect.static(appConfig.app)
+            ];
+          }
+        }
+      },
+      testserver: {
+        options: {
+          port: 8000,
+          hostname: '0.0.0.0',
+          middleware: function (connect, options) {
+            console.log('options.base', options.base);
+            var base = Array.isArray(options.base) ? options.base[options.base.length - 1] : options.base;
+            return [
+              connect.static(base)
             ];
           }
         }
@@ -414,14 +430,18 @@ module.exports = function (grunt) {
     },
 
     protractor: {
-      options: {
-        keepAlive: false,
-        configFile: "protractor-config.js"
-      },
-      webdriver: {
+      local: {
         options: {
-          user: process.env.SAUCE_USERNAME,
-          key: process.env.SAUCE_ACCESS_KEY
+          configFile: 'protractor-config.js'
+        }
+      },
+      travis: {
+        options: {
+          configFile: 'protractor-config.js',
+          args: {
+            sauceUser: sauceUser,
+            sauceKey: sauceKey
+          }
         }
       }
     },
@@ -457,22 +477,37 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('travis', ['shell:protractor_update', 'protractor:webdriver']);
- 
+  grunt.registerTask('travis', ['shell:protractor_update','connect:testserver', 'sauce-connect', 'protractor:travis']);
+
+  grunt.registerTask('local', ['shell:protractor_update', 'protractor:local']);
+
+  grunt.registerTask('sauce-connect', 'Launch Sauce Connect', function () {
+    var done = this.async();
+    require('sauce-connect-launcher')({
+      username: sauceUser,
+      accessKey: sauceKey
+    }, function (err, sauceConnectProcess) {
+      if (err) {
+        console.error(err.message);
+      } else {
+        done();
+      }
+    });
+  });
 
   grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve:' + target]);
   });
 
-  grunt.registerTask('test', [
-    'clean:server',
-    'wiredep',
-    'concurrent:test',
-    'autoprefixer',
-    'connect:test',
-    'karma'
-  ]);
+  // grunt.registerTask('test', [
+  //   'clean:server',
+  //   'wiredep',
+  //   'concurrent:test',
+  //   'autoprefixer',
+  //   'connect:test',
+  //   'karma'
+  // ]);
 
   grunt.registerTask('build', [
     'clean:dist',

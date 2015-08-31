@@ -43,7 +43,8 @@
     "chai-as-promised": "~5.1.0",
     "grunt-protractor-runner": "~2.1.0",
     "grunt-shell": "~1.1.2",
-    "grunt-webdriver": "~0.5.2"
+    "grunt-webdriver": "~0.5.2",
+    "sauce-connect-launcher": "~0.12.0"
   },
   "engines": {
     "node": ">=0.10.0"
