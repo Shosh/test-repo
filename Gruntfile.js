@@ -478,7 +478,7 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('travis', ['bower:install', 'test:unit', 'shell:protractor_update', 'protractor:saucelabs']);
+  grunt.registerTask('travis', ['shell:protractor_update', 'protractor:saucelabs']);
  
 
   grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
