@@ -6,7 +6,7 @@ var expect = chai.expect;
 
 describe('Test', function() {
   beforeEach(function() {
-    return browser.get("#/profile");
+    browser.get("http://localhost:9000/#/profile");
   });
 
   it('should have email there', function() {
