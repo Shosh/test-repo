@@ -11,7 +11,7 @@ exports.config = {
   chromeOnly: false,
   seleniumPort: null,
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'firefox'
   }
   
 };
