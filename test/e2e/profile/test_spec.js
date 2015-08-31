@@ -4,11 +4,6 @@ var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 var expect = chai.expect;
 
-var browser = new webdriver.Builder();
-browser.forBrowser("chrome");
-browser.withCapabilities(webdriver.Capabilities.chrome());
-browser.build();
-
 describe('Test', function() {
   this.timeout(15000);
 
