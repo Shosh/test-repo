@@ -14,6 +14,7 @@ module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+  grunt.loadNpmTasks('grunt-karma');
 
   var sauceUser = 'mh_vasileva';
   var sauceKey = 'bed742a6-791a-417d-a4f2-e830d848bbb2';
@@ -444,7 +445,8 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'test/karma.conf.js',
-        singleRun: true
+        singleRun: true,
+        autoWatch: false
       }
     }
   });
@@ -488,14 +490,14 @@ module.exports = function (grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
-  // grunt.registerTask('test', [
-  //   'clean:server',
-  //   'wiredep',
-  //   'concurrent:test',
-  //   'autoprefixer',
-  //   'connect:test',
-  //   'karma'
-  // ]);
+  grunt.registerTask('test', [
+    'clean:server',
+    'wiredep',
+    'concurrent:test',
+    'autoprefixer',
+    'connect:testserver',
+    'karma:unit'
+  ]);
 
   grunt.registerTask('build', [
     'clean:dist',
@@ -519,7 +521,4 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
-
-    grunt.loadNpmTasks('grunt-webdriver');
-
 };
