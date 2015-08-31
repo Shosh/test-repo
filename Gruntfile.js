@@ -413,6 +413,27 @@ module.exports = function (grunt) {
       ]
     },
 
+    protractor: {
+      options: {
+        keepAlive: false,
+        configFile: "protractor-config.js"
+      },
+      saucelabs: {
+        options: {
+          args: {
+            sauceUser: process.env.SAUCE_USERNAME,
+            sauceKey: process.env.SAUCE_ACCESS_KEY
+          }
+        }
+      }
+    },
+    shell: {
+      protractor_update: {
+        command: 'node_modules/protractor/bin/webdriver-manager update'
+      }
+    },
+
+
     // Test settings
     karma: {
       unit: {
@@ -421,15 +442,23 @@ module.exports = function (grunt) {
       }
     },
     protractor: {
-        travis: {
-            options: {
-                configFile: 'protractor-config.js',
-                args: {
-                    sauceUser: process.env.SAUCE_USERNAME,
-                    sauceKey: process.env.SAUCE_ACCESS_KEY
-                }
-            }
+      options: {
+        keepAlive: false,
+        configFile: "protractor-config.js"
+      },
+      saucelabs: {
+        options: {
+          args: {
+            sauceUser: process.env.SAUCE_USERNAME,
+            sauceKey: process.env.SAUCE_ACCESS_KEY
+          }
         }
+      }
+    },
+    shell: {
+      protractor_update: {
+        command: 'node_modules/protractor/bin/webdriver-manager update'
+      }
     }
   });
 
@@ -449,24 +478,8 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('sauce-connect', 'Launch Sauce Connect', function () {
-        var done = this.async();
-        require('sauce-connect-launcher')({
-            username: process.env.SAUCE_USERNAME,
-            accessKey: process.env.SAUCE_ACCESS_KEY
-        }, function (err, sauceConnectProcess) {
-            if (err) {
-                console.error(err.message);
-            } else {
-                done();
-            }
-        });
-  });
-
-  grunt.registerTask('test:protractor-travis', [
-        'sauce-connect',
-        'protractor:travis'
-    ]);
+  grunt.registerTask('travis', ['bower:install', 'test:unit', 'shell:protractor_update', 'protractor:saucelabs']);
+ 
 
   grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
