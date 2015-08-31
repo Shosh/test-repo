@@ -440,25 +440,6 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
-    },
-    protractor: {
-      options: {
-        keepAlive: false,
-        configFile: "protractor-config.js"
-      },
-      saucelabs: {
-        options: {
-          args: {
-            sauceUser: process.env.SAUCE_USERNAME,
-            sauceKey: process.env.SAUCE_ACCESS_KEY
-          }
-        }
-      }
-    },
-    shell: {
-      protractor_update: {
-        command: 'node_modules/protractor/bin/webdriver-manager update'
-      }
     }
   });
 
