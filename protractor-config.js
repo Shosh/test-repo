@@ -8,11 +8,14 @@ exports.config = {
   mochaOpts: {
     reporter: 'spec'
   },
-  sauceUser: process.env.SAUCE_USERNAME,
-  sauceKey: process.env.SAUCE_ACCESS_KEY,
+  sauceUser: null,
+  sauceKey: null,
+  chromeDriver: '../node_modules/protractor/selenium/chromedriver',
+  chromeOnly: false,
+  seleniumServerJar: '../node_modules/protractor/selenium/selenium-server-standalone-2.45.0.jar',
+  seleniumPort: null,
   capabilities: {
-    'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-    'build': process.env.TRAVIS_BUILD_NUMBER
+    'browserName': 'chrome'
   }
   
 };
