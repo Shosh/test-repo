@@ -5,10 +5,8 @@ chai.use(chaiAsPromised);
 var expect = chai.expect;
 
 describe('Test', function() {
-  this.timeout(15000);
-
   beforeEach(function() {
-    return browser.get("/profile");
+    return browser.get("#/profile");
   });
 
   it('should have email there', function() {

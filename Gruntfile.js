@@ -95,7 +95,7 @@ module.exports = function (grunt) {
       },
       testserver: {
         options: {
-          port: 8000,
+          port: 9000,
           hostname: '0.0.0.0',
           middleware: function (connect, options) {
             console.log('options.base', options.base);
