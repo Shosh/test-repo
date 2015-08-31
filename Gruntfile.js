@@ -95,21 +95,9 @@ module.exports = function (grunt) {
       },
       testserver: {
         options: {
-          port: 9000,
+          port: 9001,
           hostname: '0.0.0.0',
           middleware: function (connect, options) {
-            console.log('options.base', options.base);
-            var base = Array.isArray(options.base) ? options.base[options.base.length - 1] : options.base;
-            return [
-              connect.static(base)
-            ];
-          }
-        }
-      },
-      test: {
-        options: {
-          port: 9001,
-          middleware: function (connect) {
             return [
               connect.static('.tmp'),
               connect.static('test'),
@@ -479,7 +467,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('travis', ['shell:protractor_update','connect:testserver', 'sauce-connect', 'protractor:travis']);
 
-  grunt.registerTask('local', ['shell:protractor_update', 'protractor:local']);
+  grunt.registerTask('local', ['connect:testserver', 'shell:protractor_update', 'protractor:local']);
 
   grunt.registerTask('sauce-connect', 'Launch Sauce Connect', function () {
     var done = this.async();

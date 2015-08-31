@@ -6,7 +6,7 @@ var config ={
     slow:3000,
     enableTimeouts: false
   },
-  baseUrl: 'http://localhost:9000/',
+  baseUrl: 'http://localhost:9001/',
   allScriptsTimeout: 30000,
   getPageTimeout: 30000
 };
