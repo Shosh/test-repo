@@ -8,7 +8,7 @@ describe('Test', function() {
   this.timeout(15000);
 
   beforeEach(function() {
-    return browser.get("http://localhost:9000/#/profile");
+    return browser.get("/profile");
   });
 
   it('should have email there', function() {
