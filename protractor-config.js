@@ -8,7 +8,7 @@ exports.config = {
   mochaOpts: {
     reporter: 'spec'
   },
-  chromeDriver: '../node_modules/protractor/selenium/chromedriver',
+  chromeDriver: 'node_modules/protractor/selenium/chromedriver',
   chromeOnly: false,
   seleniumPort: null,
   capabilities: {
