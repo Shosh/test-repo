@@ -3,6 +3,7 @@ node_js:
   - '0.10'
 
 before_script:
+  - 'git clone git@github.com:HackSoftware/Loki.git'
   - 'npm install -g bower grunt-cli'
   - 'bower install'
   - "export DISPLAY=:99.0"
