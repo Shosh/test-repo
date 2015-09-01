@@ -24,6 +24,7 @@ before_script:
 
 
 script:
-  - 'python loki/manage.py migrate'
+  - 'python Loki/loki/manage.py migrate'
+  - 'ls'
   - 'grunt karma:unit'
   - 'grunt travis'
