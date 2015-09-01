@@ -1,8 +1,7 @@
-language: node_js
-node_js:
-  - '0.10'
+language: python
 python:
-- '3.4'
+  - "3.4"
+
 sudo: required
 addons:
   postgresql: '9.3'
@@ -14,6 +13,8 @@ before_install:
   - 'git clone https://github.com/HackSoftware/Loki.git'
 install:
   - 'sudo pip install -r Loki/requirements.txt'
+  - 'nvm install 0.10'
+  - 'npm install'
 
 before_script:
   - sleep 3 # give xvfb some time to start
