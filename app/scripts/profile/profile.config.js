@@ -19,6 +19,7 @@
     function profileData(profileService) {
       return profileService.profileData()
         .then(function(response) {
+          console.log(response);
           return response;
         });
     }

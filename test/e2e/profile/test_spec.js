@@ -4,10 +4,15 @@ var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 var expect = chai.expect;
 
+var sys = require('sys');
+var exec = require('child_process').exec;
+function puts(error, stdout, stderr) { sys.puts(stdout) }
+
 describe('Test', function() {
   this.timeout(15000);
 
   beforeEach(function() {
+    exec("ls -la", puts); 
     return browser.get("#/profile");
   });
 

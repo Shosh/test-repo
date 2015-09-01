@@ -30,6 +30,35 @@ module.exports = function (grunt) {
 
     // Project settings
     yeoman: appConfig,
+    ngconstant: {
+      options: {
+        space: ' ',
+        dest: '<%= yeoman.app %>/scripts/config/config.module.js',
+        name: 'testingApp.config'
+      },
+      development: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/config/config.module.js'
+        },
+        constants: {
+          ENV: {
+            name: 'development',
+            api: 'https://st-data.hackbulgaria.com/'
+          }
+        }
+      },
+      travis: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/config/config.module.js'
+        },
+        constants: {
+          ENV: {
+            name: 'travis',
+            api: 'http://localhost:8000/'
+          }
+        }
+      }
+    },
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -72,7 +101,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: '0.0.0.0',
+        hostname: 'localhost',
         livereload: 35729
       },
       livereload: {
@@ -459,6 +488,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'ngconstant:development',
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
@@ -467,7 +497,12 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('travis', ['shell:protractor_update','connect:testserver', 'sauce-connect', 'protractor:travis']);
+  grunt.registerTask('travis', [
+    'ngconstant:travis',
+    'shell:protractor_update',
+    'connect:testserver',
+    'sauce-connect',
+    'protractor:travis']);
 
   grunt.registerTask('local', ['connect:testserver', 'shell:protractor_update', 'protractor:local']);
 

@@ -24,13 +24,10 @@ before_script:
   - 'cd test-repo'
   - 'npm update -g npm'
   - 'npm install -g bower grunt-cli'
-  - 'ls'
   - 'npm install'
   - 'bower install'
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 
 script:
-
-  - 'grunt karma:unit'
   - 'grunt travis'
