@@ -1,8 +1,6 @@
 language: python
 python:
   - "3.4"
-
-sudo: required
 addons:
   postgresql: '9.3'
 services: postgresql
@@ -12,13 +10,12 @@ before_install:
   - 'cd ..'
   - 'git clone https://github.com/HackSoftware/Loki.git'
 install:
-  - 'sudo pip install -r Loki/requirements.txt'
+  - 'pip install -r Loki/requirements.txt'
   - 'nvm install 0.10'
 
 before_script:
-  - sleep 3 # give xvfb some time to start
+  - sleep 3
   - psql -c 'CREATE DATABASE testdb;' -U postgres
-  - ls
   - 'python Loki/loki/manage.py migrate'
   - 'python Loki/loki/manage.py runserver &'
   
