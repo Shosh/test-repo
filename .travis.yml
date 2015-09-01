@@ -14,13 +14,12 @@ before_install:
 install:
   - 'sudo pip install -r Loki/requirements.txt'
   - 'nvm install 0.10'
-  - 'npm install'
 
 before_script:
   - sleep 3 # give xvfb some time to start
   - psql -c 'CREATE DATABASE testdb;' -U postgres
-  - 'python3 Loki/loki/manage.py migrate'
-  - 'python3 Loki/loki/manage.py runserver &'
+  - 'python Loki/loki/manage.py migrate'
+  - 'python Loki/loki/manage.py runserver &'
   
   - 'cd test-repo'
   - 'npm update -g npm'
