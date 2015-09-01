@@ -18,8 +18,8 @@ install:
 before_script:
   - sleep 3 # give xvfb some time to start
   - psql -c 'CREATE DATABASE testdb;' -U postgres
-  - 'python Loki/loki/manage.py migrate'
-  - 'python Loki/loki/manage.py runserver &'
+  - 'python3 Loki/loki/manage.py migrate'
+  - 'python3 Loki/loki/manage.py runserver &'
   
   - 'cd test-repo'
   - 'npm update -g npm'
